@@ -1,0 +1,11 @@
+node_modules
+dist
+coverage
+.firebase
+*.log
+.DS_Store
+
+# Local environment files (never commit real values)
+.env
+.env.local
+.env.*.local
