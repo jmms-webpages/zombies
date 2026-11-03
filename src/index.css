@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@theme {
+  --font-story: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+
+  /* Surfaces: near-black with a green cast */
+  --color-ink-950: #070a09;
+  --color-ink-900: #0c110f;
+  --color-ink-800: #121916;
+  --color-ink-700: #19221e;
+  --color-ink-600: #25312b;
+  --color-ink-500: #34443c;
+
+  /* Text */
+  --color-bone-100: #e8ebe6;
+  --color-bone-200: #cdd4cd;
+  --color-bone-300: #aab5ad;
+  --color-bone-400: #8b988f;
+
+  /* Semantic accents */
+  --color-blood-300: #f08b82;
+  --color-blood-400: #e5675c;
+  --color-blood-500: #c9453b;
+  --color-blood-900: #3a1512;
+  --color-toxic-300: #b4e57a;
+  --color-toxic-400: #8fd14f;
+  --color-toxic-500: #6fb034;
+  --color-toxic-900: #1b2c10;
+  --color-ember-300: #f0c46a;
+  --color-ember-400: #e3a93b;
+  --color-ember-900: #33260b;
+  --color-tide-300: #7fd0cd;
+  --color-tide-400: #4fb3b0;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-ink-950 text-bone-100 font-sans antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 45% at 50% -10%, rgba(111, 176, 52, 0.1), transparent 60%),
+      radial-gradient(ellipse 70% 40% at 50% 110%, rgba(201, 69, 59, 0.07), transparent 60%);
+    background-attachment: fixed;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-ink-500) transparent;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ember-300);
+    outline-offset: 2px;
+  }
+}
+
+@keyframes dice-tumble {
+  0% {
+    transform: rotate(-24deg) scale(0.6);
+    opacity: 0.2;
+  }
+  60% {
+    transform: rotate(9deg) scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes feed-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes thinking {
+  0%,
+  80%,
+  100% {
+    opacity: 0.2;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+/* Motion is opt-out friendly: nothing animates for users who ask for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-dice {
+    animation: dice-tumble 0.55s ease-out both;
+  }
+  .animate-feed-in {
+    animation: feed-in 0.35s ease-out both;
+  }
+  .animate-thinking > span {
+    animation: thinking 1.2s infinite;
+  }
+  .animate-thinking > span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .animate-thinking > span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+}
